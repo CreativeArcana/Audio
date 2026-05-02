@@ -1,0 +1,19 @@
+{
+    "name": "CreativeArcana.Audio.Example",
+    "rootNamespace": "CreativeArcana.Audio.Example",
+    "references": [
+        "GUID:0e07b38d1affdc545bd21593f7394016",
+        "GUID:c4976e6e03aada5408be0b31935b1d26",
+        "GUID:fe829ce93b52c374f8d446768a0c8eef",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

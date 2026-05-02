@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a832fbf5439f974448d303ebd381cdd6, type: 3}
+  m_Name: AudioEntry_Music2
+  m_EditorClassIdentifier: CreativeArcana.Audio::CreativeArcana.Audio.AudioEntry
+  _id:
+    _value: Music2
+  _clips:
+  - {fileID: 8300000, guid: ca33073f38d1ca843a529c2d9f612aa2, type: 3}
+  _playbackMode: 0
+  _audioChannel: 1
+  _lifetime: 1
+  _minVolume: 1
+  _maxVolume: 1
+  _minPitch: 1
+  _maxPitch: 1
+  _loop: 1
+  _spatial: 0
+  _spatialBlend: 1
+  _dopplerLevel: 1
+  _spread: 0
+  _rolloffMode: 0
+  _minDistance: 1
+  _maxDistance: 500

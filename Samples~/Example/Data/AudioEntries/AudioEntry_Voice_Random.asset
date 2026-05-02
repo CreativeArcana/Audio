@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a832fbf5439f974448d303ebd381cdd6, type: 3}
+  m_Name: AudioEntry_Voice_Random
+  m_EditorClassIdentifier: CreativeArcana.Audio::CreativeArcana.Audio.AudioEntry
+  _id:
+    _value: Voice_Random
+  _clips:
+  - {fileID: 8300000, guid: 0d3f69dabde5cbf4d87392aec4cb0a39, type: 3}
+  - {fileID: 8300000, guid: af722a1130ef1a540b229a5a926bd96a, type: 3}
+  _playbackMode: 1
+  _audioChannel: 4
+  _minVolume: 1
+  _maxVolume: 1
+  _minPitch: 1
+  _maxPitch: 1
+  _loop: 0
+  _spatial: 0
+  _spatialBlend: 1
+  _dopplerLevel: 1
+  _spread: 0
+  _rolloffMode: 0
+  _minDistance: 1
+  _maxDistance: 500

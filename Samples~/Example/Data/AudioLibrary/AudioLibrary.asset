@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0352e4d71584c99b296b5548d958d67, type: 3}
+  m_Name: AudioLibrary
+  m_EditorClassIdentifier: CreativeArcana.Audio::CreativeArcana.Audio.AudioLibrary
+  _entries:
+  - {fileID: 11400000, guid: b0c51bbcf6c05c047ad563fa943e2a87, type: 2}
+  - {fileID: 11400000, guid: 1c798cefb907ba943bea59ec741f0de5, type: 2}
+  - {fileID: 11400000, guid: ec99fff8ba95b1943aabb482a0afa35a, type: 2}
+  - {fileID: 11400000, guid: 0dea8e9766c662348905aaee7eb1c4b6, type: 2}
+  - {fileID: 11400000, guid: ecbaf92c9d9608843b8791f5c8f18428, type: 2}
+  - {fileID: 11400000, guid: 9f29b6a3fdce1fe43a4ffd4fc712be98, type: 2}
+  - {fileID: 11400000, guid: cd6b8abf3e42dec45b95451b9b0e22c0, type: 2}
+  - {fileID: 11400000, guid: 467d14fb605bd634ba6681d8616c5165, type: 2}
+  - {fileID: 11400000, guid: 32d4b0dba60ab354782dc1e958270693, type: 2}
+  - {fileID: 11400000, guid: 2feaf2f5a0ab59e44a5223f8fc753882, type: 2}
+  - {fileID: 11400000, guid: 8ed10beb6ef72584db5e260dbd539764, type: 2}
+  - {fileID: 11400000, guid: 5e8ec12eabe77e648895d447462c2c62, type: 2}
+  - {fileID: 11400000, guid: 2c2e889b287a181468cfd522141eb041, type: 2}

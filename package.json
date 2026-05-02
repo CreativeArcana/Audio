@@ -1,0 +1,30 @@
+﻿{
+  "name": "com.creativearcana.audio",
+  "version": "1.0.0",
+  "displayName": "Creative Arcana Audio",
+  "description": "A Unity audio management package for playing, controlling, fading, pooling, mixing, and ducking audio using Unity's built-in audio system.",
+  "unity": "6000.2",
+  "author": {
+    "name": "Creative Arcana",
+    "url": "https://github.com/CreativeArcana"
+  },
+  "keywords": [
+    "audio",
+    "sound",
+    "unity",
+    "audio-service",
+    "audio-mixer",
+    "ducking"
+  ],
+  "dependencies": {
+    "com.creativearcana.factory": "1.1.0"
+  },
+  "samples": [
+    {
+      "displayName": "Example",
+      "description": "Example scene demonstrating all AudioChannel types, multiple audio PlayMode options, an AudioSettingPanel for adjusting and saving AudioMixer channel volumes, and scene reload support for testing persistent audio playback. Requires TextMeshPro.",
+      "path": "Samples~/Example"
+    }
+  ],
+  "license": "MIT"
+}
