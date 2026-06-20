@@ -70,16 +70,21 @@ namespace CreativeArcana.Audio
 
             var handle = CreateHandle();
 
+            // Register before Play, because very short clips may end immediately.
+            _activeAudios.Add(handle.Id, new ActiveAudio(sourceController, entry.Lifetime));
+            _duckingManager.Apply(handle.Id, duckingProfile);
+
             if (!sourceController.Play(handle, entry, clip, fadeInDuration))
             {
-                sourceController.OnEnded -= OnEnded;
-                _sourceControllerFactory.Release(sourceController);
+                if (_activeAudios.Remove(handle.Id, out var activeAudio))
+                {
+                    activeAudio.SourceController.OnEnded -= OnEnded;
+                    _duckingManager.Release(handle.Id);
+                    _sourceControllerFactory.Release(activeAudio.SourceController);
+                }
+
                 return AudioHandle.Invalid;
             }
-
-            _activeAudios.Add(handle.Id, new ActiveAudio(sourceController, entry.Lifetime));
-
-            _duckingManager.Apply(handle.Id, duckingProfile);
 
             return handle;
         }
