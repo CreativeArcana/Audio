@@ -2,6 +2,10 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.0.1] - 2026-June-21
+
+- Fix race condition when releasing very short audio clips back to the pool
+
 ## [1.0.0] - 2026-May-1
 
 ### Added

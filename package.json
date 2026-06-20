@@ -1,6 +1,6 @@
 ﻿{
   "name": "com.creativearcana.audio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Creative Arcana Audio",
   "description": "A Unity audio management package for playing, controlling, fading, pooling, mixing, and ducking audio using Unity's built-in audio system.",
   "unity": "6000.2",
