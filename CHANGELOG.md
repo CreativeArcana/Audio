@@ -4,7 +4,11 @@ All notable changes to this package will be documented in this file.
 
 ## [1.0.1] - 2026-June-21
 
-- Fix race condition when releasing very short audio clips back to the pool
+### Fixed
+
+- Fixed very short audio clips not being released back to the pool after playback.
+- Fixed an edge case where an `AudioSourceController` could remain active in the scene if a clip started and finished between two frame updates.
+- Improved audio completion detection so pooled sources no longer rely only on observing `AudioSource.isPlaying` during `Update`.
 
 ## [1.0.0] - 2026-May-1
 

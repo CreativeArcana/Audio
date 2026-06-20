@@ -37,16 +37,18 @@ namespace CreativeArcana.Audio
         private bool _hasStartedPlaying;
 
         private int _playFrame;
-        
+
+        private double _expectedEndDspTime;
+
+        private bool _hasExpectedEndTime;
+
         private void Update()
         {
             if (_hasReportedEnded)
                 return;
 
             if (IsAudioFinished())
-            {
                 NotifyFinished();
-            }
         }
 
         private void LateUpdate()
@@ -54,7 +56,7 @@ namespace CreativeArcana.Audio
             if (_followTarget != null)
                 transform.position = _followTarget.position;
         }
-        
+
         public void Initialize(Dictionary<AudioChannel, AudioMixerGroup> mixerGroups)
         {
             _mixerGroups = mixerGroups ?? throw new ArgumentNullException(nameof(mixerGroups));
@@ -93,6 +95,8 @@ namespace CreativeArcana.Audio
 
             _audioSource.Play();
 
+            RegisterExpectedEndTimeFromCurrentState();
+
             if (fadeInDuration > 0f)
                 _fadeTween = FadeVolume(_targetVolume, fadeInDuration);
 
@@ -105,6 +109,7 @@ namespace CreativeArcana.Audio
                 return;
 
             KillFade();
+            ClearExpectedEndTime();
 
             if (fadeOutDuration <= 0f)
             {
@@ -134,6 +139,7 @@ namespace CreativeArcana.Audio
                 return;
 
             _wasPaused = true;
+            ClearExpectedEndTime();
 
             if (fadeOutDuration <= 0f)
             {
@@ -168,11 +174,14 @@ namespace CreativeArcana.Audio
             {
                 _audioSource.volume = _targetVolume;
                 _audioSource.UnPause();
+                RegisterExpectedEndTimeFromCurrentState();
                 return;
             }
 
             _audioSource.volume = 0f;
             _audioSource.UnPause();
+
+            RegisterExpectedEndTimeFromCurrentState();
 
             _fadeTween = FadeVolume(_targetVolume, fadeInDuration);
         }
@@ -194,6 +203,9 @@ namespace CreativeArcana.Audio
                 return;
 
             _audioSource.pitch = pitch;
+
+            if (_audioSource.clip != null && !_audioSource.loop && !_wasPaused)
+                RegisterExpectedEndTimeFromCurrentState();
         }
 
         public void SetLoop(bool loop)
@@ -202,6 +214,11 @@ namespace CreativeArcana.Audio
                 return;
 
             _audioSource.loop = loop;
+
+            if (loop)
+                ClearExpectedEndTime();
+            else
+                RegisterExpectedEndTimeFromCurrentState();
         }
 
         public void SetChannel(AudioChannel audioChannel)
@@ -278,6 +295,8 @@ namespace CreativeArcana.Audio
             _hasStartedPlaying = false;
 
             _playFrame = Time.frameCount;
+
+            ClearExpectedEndTime();
         }
 
         private bool IsAudioFinished()
@@ -298,7 +317,50 @@ namespace CreativeArcana.Audio
                 return false;
             }
 
-            return _hasStartedPlaying;
+            if (_hasStartedPlaying)
+                return true;
+
+            // Very short clips can start and finish between two Update calls.
+            return _hasExpectedEndTime && AudioSettings.dspTime >= _expectedEndDspTime;
+        }
+
+        private void RegisterExpectedEndTimeFromCurrentState()
+        {
+            ClearExpectedEndTime();
+
+            if (_audioSource == null || _audioSource.clip == null)
+                return;
+
+            if (_audioSource.loop || _wasPaused)
+                return;
+
+            var pitch = Mathf.Abs(_audioSource.pitch);
+
+            if (pitch <= 0.0001f)
+                return;
+
+            var remainingDuration = GetRemainingClipDuration() / pitch;
+
+            // Small grace prevents reporting finished before Unity updates AudioSource state.
+            _expectedEndDspTime = AudioSettings.dspTime + remainingDuration + 0.02d;
+            _hasExpectedEndTime = true;
+        }
+
+        private float GetRemainingClipDuration()
+        {
+            if (_audioSource == null || _audioSource.clip == null)
+                return 0f;
+
+            var clipLength = _audioSource.clip.length;
+            var currentTime = Mathf.Clamp(_audioSource.time, 0f, clipLength);
+
+            return Mathf.Max(0f, clipLength - currentTime);
+        }
+
+        private void ClearExpectedEndTime()
+        {
+            _expectedEndDspTime = 0d;
+            _hasExpectedEndTime = false;
         }
 
         private void ApplySpatialSettings(AudioEntry entry)
@@ -324,6 +386,7 @@ namespace CreativeArcana.Audio
         private void ResetState()
         {
             KillFade();
+            ClearExpectedEndTime();
 
             if (_audioSource != null)
             {
@@ -425,6 +488,8 @@ namespace CreativeArcana.Audio
                 return;
 
             _hasReportedEnded = true;
+            ClearExpectedEndTime();
+
             OnEnded?.Invoke(_handle.Id, AudioEndReason.Finished);
         }
 
@@ -434,6 +499,8 @@ namespace CreativeArcana.Audio
                 return;
 
             _hasReportedEnded = true;
+            ClearExpectedEndTime();
+
             OnEnded?.Invoke(_handle.Id, AudioEndReason.Stopped);
         }
     }
